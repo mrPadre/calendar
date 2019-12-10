@@ -1,0 +1,20 @@
+.container {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.column{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px;
+}
+.table{
+    display: flex;
+    flex-direction: row;
+}
+.week_day{
+    align-self: flex-start;
+}
