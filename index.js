@@ -3,7 +3,20 @@ let date = new Date();
 let year = date.getFullYear();
 let month = date.getMonth();
 let today = date.getDate();
-console.log('дата', date);
+
+let mainDate = new Date(year, month, today);
+
+let options = {
+    era: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    weekday: 'long',
+    timezone: 'UTC',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric'
+};
 
 const monday = document.getElementById('monday');
 const tuesday = document.getElementById('tuesday');
@@ -14,64 +27,163 @@ const saturday = document.getElementById('saturday');
 const sunday = document.getElementById('sunday');
 
 
-let start = -5;
-let changeDate = new Date(year, month , 1);
-let arrMon = [];
-let arrTus = [];
-let arrWen = [];
-let arrThu = [];
-let arrFri = [];
-let arrSat = [];
-let arrSun = [];
-
-let a = changeDate.getDay();
-console.log('месяц', a);
 
 
-for ( let i = 1 ; i <= 31; i++){
-    changeDate.setDate(i);
-    if (changeDate.getDay() === 1){
-        arrMon.push(changeDate.getDate());
+
+function monthToString ( month ) {
+    let monthString = '';
+    switch (month) {
+        case 0: monthString = "Январь";
+        break;
+        case 1: monthString = "Февраль";
+            break;
+        case 2: monthString = "Март";
+            break;
+        case 3: monthString = "Апрель";
+            break;
+        case 4: monthString = "Май";
+            break;
+        case 5: monthString = "Июнь";
+            break;
+        case 6: monthString = "Июль";
+            break;
+        case 7: monthString = "Август";
+            break;
+        case 8: monthString = "Сентябрь";
+            break;
+        case 9: monthString = "Октябрь";
+            break;
+        case 10: monthString = "Ноябрь";
+            break;
+        case 11: monthString = "Декабрь";
+            break;
     }
-    else if (changeDate.getDay() === 2){
-        arrTus.push(changeDate.getDate());
-    }
-    else if (changeDate.getDay() === 3){
-        arrWen.push(changeDate.getDate());
-    }
-    else if (changeDate.getDay() === 4){
-        arrThu.push(changeDate.getDate());
-    }
-    else if (changeDate.getDay() === 5){
-        arrFri.push(changeDate.getDate());
-    }
-    else if (changeDate.getDay() === 6){
-        arrSat.push(changeDate.getDate());
-    }
-    else if (changeDate.getDay() === 0){
-        arrSun.push(changeDate.getDate());
-    }
+    return monthString;
 }
 
-arrMon.map((item) => {
-monday.innerHTML += `<div class="day_box"> ${item} </div>`;
-});
-arrTus.map((item) => {
-    tuesday.innerHTML += `<div class="day_box"> ${item} </div>`;
-});
-arrWen.map((item) => {
-    wednesday.innerHTML += `<div class="day_box"> ${item} </div>`;
-});
-arrThu.map((item) => {
-    thursday.innerHTML += `<div class="day_box"> ${item} </div>`;
-});
-arrFri.map((item) => {
-    friday.innerHTML += `<div class="day_box"> ${item} </div>`;
-});
-arrSat.map((item) => {
-    saturday.innerHTML += `<div class="day_box"> ${item} </div>`;
-});
-arrSun.map((item) => {
-    sunday.innerHTML += `<div class="day_box"> ${item} </div>`;
-});
 
+
+function handleChangeYear (event) {
+    let id = event.target.id;
+    if (id === 'leftYearBtn'){
+        year = year - 1;
+        render();
+    }else if (id === 'rightYearBtn'){
+        year = year + 1;
+        render();
+    }else if (id === 'leftMonthBtn'){
+        month = month - 1;
+        if (month < 0){
+            month = 11;
+            year = year - 1;
+        }
+        render();
+    }else if (id === 'rightMonthBtn'){
+        month = month + 1;
+        if (month > 11){
+            month = 0;
+            year = year + 1;
+        }
+        render();
+    }
+}
+let startDate = 0;
+let finishDate = 0;
+function findFirstDay (y, m) {
+    let d = new Date(y, m, 1);
+    let w = d.getDay();
+    switch (w) {
+        case 1: startDate = 1;
+        finishDate = 35;
+        break;
+        case 2: startDate = 0;
+            finishDate = 34;
+            break;
+        case 3: startDate = -1;
+            finishDate = 33;
+            break;
+        case 4: startDate = -2;
+            finishDate = 32;
+            break;
+        case 5: startDate = -3;
+            finishDate = 31;
+            break;
+        case 6: startDate = -4;
+            finishDate = 37;
+            break;
+        case 0: startDate = -5;
+            finishDate = 36;
+            break;
+    }
+    return startDate;
+
+}
+
+const leftYearBtn = document.getElementById('leftYearBtn');
+leftYearBtn.onclick = (event) => handleChangeYear(event);
+const rightYearBtn = document.getElementById('rightYearBtn');
+rightYearBtn.onclick = (event) => handleChangeYear(event);
+const leftMonthBtn = document.getElementById('leftMonthBtn');
+leftMonthBtn.onclick = (event) => handleChangeYear(event);
+const rightMonthBtn = document.getElementById('rightMonthBtn');
+rightMonthBtn.onclick = (event) => handleChangeYear(event);
+
+
+function render () {
+
+
+    let monthString = monthToString(month);
+    console.log(findFirstDay(year, month));
+
+    monday.innerHTML = '<div class="day_box">ПН</div>';
+    tuesday.innerHTML = '<div class="day_box">ВТ</div>';
+    wednesday.innerHTML = '<div class="day_box">СР</div>';
+    thursday.innerHTML = '<div class="day_box">ЧТ</div>';
+    friday.innerHTML = '<div class="day_box">ПТ</div>';
+    saturday.innerHTML = '<div class="day_box">СБ</div>';
+    sunday.innerHTML = '<div class="day_box">ВС</div>';
+
+    let containerYear = document.getElementById('year');
+    containerYear.innerHTML = year;
+
+    let containerMonth = document.getElementById('month');
+    containerMonth.innerHTML = monthString;
+
+
+    for ( let i = startDate ; i <= finishDate; ++ i){
+        let changeDate = new Date(year, month , i);
+
+
+        let styleArr = "day_box";
+        if (changeDate.getFullYear() === date.getFullYear() && changeDate.getMonth() === date.getMonth() && changeDate.getDate() === date.getDate()){
+            styleArr = "mainDate"
+        }
+        if (changeDate.getMonth() !== month){
+            styleArr = "secondary"
+        }
+        if (changeDate.getDay() === 1){
+            monday.innerHTML += `<div class=${styleArr}> ${changeDate.getDate()} </div>`;
+        }
+        else if (changeDate.getDay() === 2){
+            tuesday.innerHTML += `<div class=${styleArr}> ${changeDate.getDate()} </div>`;
+        }
+        else if (changeDate.getDay() === 3){
+            wednesday.innerHTML += `<div class=${styleArr}> ${changeDate.getDate()} </div>`;
+        }
+        else if (changeDate.getDay() === 4){
+            thursday.innerHTML += `<div class=${styleArr}> ${changeDate.getDate()} </div>`;
+        }
+        else if (changeDate.getDay() === 5){
+            friday.innerHTML += `<div class=${styleArr}> ${changeDate.getDate()} </div>`;
+        }
+        else if (changeDate.getDay() === 6){
+            saturday.innerHTML += `<div class=${styleArr}> ${changeDate.getDate()} </div>`;
+        }
+        else if (changeDate.getDay() === 0){
+            sunday.innerHTML += `<div class=${styleArr}> ${changeDate.getDate()} </div>`;
+        }
+    }
+
+}
+
+render();

@@ -17,4 +17,62 @@
 }
 .week_day{
     align-self: flex-start;
+
+}
+.holiday{
+}
+
+.day_box{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.mainDate{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: indianred;
+    color: white;
+}
+.secondary{
+    color: lightgray;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navigation__year{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+.navigation__month{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+.year{
+    margin: 10px;
+}
+.month{
+    margin: 10px;
+}
+.btn{
+    border: 1px solid indianred;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+.title{
+    text-align: center;
 }
