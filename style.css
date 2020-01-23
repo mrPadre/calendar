@@ -2,6 +2,7 @@
     margin: auto;
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
 }
 .column{
@@ -9,7 +10,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    margin: 10px;
+    margin: 5px;
 }
 .table{
     display: flex;
@@ -20,6 +21,7 @@
 
 }
 .holiday{
+    color: indianred;
 }
 
 .day_box{
@@ -28,6 +30,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border-bottom: 1px solid black;
 }
 .mainDate{
     width: 30px;
@@ -38,6 +41,7 @@
     border-radius: 50%;
     background-color: indianred;
     color: white;
+    margin: 1px;
 }
 .secondary{
     color: lightgray;
@@ -46,6 +50,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 1px;
 }
 
 .navigation__year{
@@ -61,18 +66,41 @@
     flex-direction: row;
 }
 .year{
-    margin: 10px;
+    margin: 0 10px;
+    font-size: x-large;
+    text-decoration: underline;
 }
 .month{
-    margin: 10px;
+    margin: 0 10px;
+    font-size: x-large;
+    text-decoration: underline;
 }
 .btn{
-    border: 1px solid indianred;
+    border: none;
     border-radius: 50%;
     width: 30px;
     height: 30px;
     cursor: pointer;
+    background: none;
 }
 .title{
     text-align: center;
+}
+#saturday{
+    color: indianred;
+}
+#sunday{
+    color: indianred;
+}
+.summer{
+
+}
+.winter{
+
+}
+.spring{
+
+}
+.autumn{
+
 }

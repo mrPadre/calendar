@@ -94,19 +94,19 @@ function findFirstDay (y, m) {
     let w = d.getDay();
     switch (w) {
         case 1: startDate = 1;
-        finishDate = 35;
+        finishDate = 42;
         break;
         case 2: startDate = 0;
-            finishDate = 34;
+            finishDate = 41;
             break;
         case 3: startDate = -1;
-            finishDate = 33;
+            finishDate = 40;
             break;
         case 4: startDate = -2;
-            finishDate = 32;
+            finishDate = 39;
             break;
         case 5: startDate = -3;
-            finishDate = 31;
+            finishDate = 38;
             break;
         case 6: startDate = -4;
             finishDate = 37;
@@ -129,11 +129,13 @@ const rightMonthBtn = document.getElementById('rightMonthBtn');
 rightMonthBtn.onclick = (event) => handleChangeYear(event);
 
 
+let imageBox = document.getElementById('imageBox');
+
+
 function render () {
 
 
     let monthString = monthToString(month);
-    console.log(findFirstDay(year, month));
 
     monday.innerHTML = '<div class="day_box">ПН</div>';
     tuesday.innerHTML = '<div class="day_box">ВТ</div>';
@@ -149,12 +151,35 @@ function render () {
     let containerMonth = document.getElementById('month');
     containerMonth.innerHTML = monthString;
 
+    findFirstDay(year, month);
+    let imageStyle = '';
+
+    switch (month) {
+        case 11 :
+        case 0  :
+        case 1  : imageStyle = "winter";
+            break;
+        case 2 :
+        case 3  :
+        case 4  : imageStyle = "spring";
+            break;
+        case 5 :
+        case 6  :
+        case 7  : imageStyle = "summer";
+            break;
+        case 8 :
+        case 9  :
+        case 10  : imageStyle = "autumn";
+            break;
+
+    }
+    imageBox.className = imageStyle;
+    console.log(imageStyle);
 
     for ( let i = startDate ; i <= finishDate; ++ i){
         let changeDate = new Date(year, month , i);
-
-
         let styleArr = "day_box";
+
         if (changeDate.getFullYear() === date.getFullYear() && changeDate.getMonth() === date.getMonth() && changeDate.getDate() === date.getDate()){
             styleArr = "mainDate"
         }
@@ -178,6 +203,7 @@ function render () {
         }
         else if (changeDate.getDay() === 6){
             saturday.innerHTML += `<div class=${styleArr}> ${changeDate.getDate()} </div>`;
+
         }
         else if (changeDate.getDay() === 0){
             sunday.innerHTML += `<div class=${styleArr}> ${changeDate.getDate()} </div>`;
